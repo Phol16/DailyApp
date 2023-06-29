@@ -1,7 +1,7 @@
 import { genSalt, passwordDecrypt, passwordEncrypt } from '../utils/Others/encryption';
-import { IAuthentication, IUser } from '../utils/Types/authenticationTypes';
+import { IAuthentication, IUser } from '../utils/Types/dataTypes';
 
-export class AuthenticationService {
+export class authenticationService {
   constructor(private _authenticationRespositiory: IAuthentication) {}
 
   //Register Service
@@ -28,7 +28,7 @@ export class AuthenticationService {
       values.salt = salt;
       values.password = hashedPass;
 
-      const createdUser = await this._authenticationRespositiory.createUser_Repo(values);
+      const createdUser = await this._authenticationRespositiory.createUser(values);
       return {
         status: 200,
         message: createdUser,

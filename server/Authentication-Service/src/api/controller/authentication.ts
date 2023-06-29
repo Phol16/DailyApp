@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { ISignIn, IUser } from '../../utils/Types/authenticationTypes';
-import { Factory } from '../../utils/Others/Factory';
+import { ISignIn, IUser } from '../../utils/Types/dataTypes';
+import { factory } from '../../utils/Others/factory';
 
-const service = Factory.authenticationLogic();
+const service = factory.authenticationLogic();
 
 export const register = async (req: Request, res: Response) => {
   try {

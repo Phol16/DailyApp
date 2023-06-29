@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 
 dotenv.config();
+
 const saltRound = parseInt(process.env.SALT as string);
 
 export const genSalt = async()=>{ return await bcrypt.genSalt(saltRound) };

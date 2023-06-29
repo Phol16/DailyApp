@@ -1,9 +1,10 @@
 import prisma from './prismadb';
-import { IUser, IAuthentication } from '../utils/Types/authenticationTypes';
+
+import { IUser, IAuthentication } from '../utils/Types/dataTypes';
 
 export class authenticationRepository implements IAuthentication {
   //register user to the database
-  public createUser_Repo(values: IUser) {
+  public createUser(values: IUser) {
     try {
       if (values.salt) {
         if (values.image) {

@@ -13,6 +13,13 @@ export interface IUser extends ISignIn {
 }
 
 export interface IAuthentication {
-  createUser_Repo(values: IUser): any;
+  createUser(values: IUser): any;
   getUserByEmail(email: string): any;
+}
+
+export interface IUserFunctionality {
+  getCurrentUser(id: number): any;
+  udapteUser(id: number, value: Record<string, any>): any;
+  deleteUser(id: number): string;
+  getAllUser(): any;
 }
