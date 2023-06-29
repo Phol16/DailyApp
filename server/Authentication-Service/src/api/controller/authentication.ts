@@ -31,6 +31,7 @@ export const signIn = async (req: Request, res: Response) => {
     const { email, password } = req.body as ISignIn;
 
     const result = await service.signInUser(email, password);
+
     res.status(result.status).json({ data: result.message });
   } catch (error) {
     console.log('signInController:', error);

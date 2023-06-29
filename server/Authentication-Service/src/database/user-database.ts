@@ -3,6 +3,7 @@ import prisma from './prismadb';
 import { IUserFunctionality } from '../utils/Types/dataTypes';
 
 export class userRepository implements IUserFunctionality {
+  //get all user from database
   public getAllUser() {
     try {
       return prisma.user.findMany({
@@ -15,6 +16,7 @@ export class userRepository implements IUserFunctionality {
     }
   }
 
+  //get current user information
   public getCurrentUser(id: number) {
     try {
       return prisma.user.findUnique({
@@ -27,6 +29,7 @@ export class userRepository implements IUserFunctionality {
     }
   }
 
+  //update user information
   public udapteUser(id: number, value: Record<string, any>) {
     try {
       
@@ -35,6 +38,7 @@ export class userRepository implements IUserFunctionality {
     }
   }
 
+  //delete user 
   deleteUser(id: number): string {
     try {
       return 'deleted';
