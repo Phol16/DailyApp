@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
-import { authenticationRepository } from '../../database/authentication-database';
-import { AuthenticationService } from '../../services/authentication-service';
-import { IUser } from '../../utils/Types/authenticationTypes';
+import { ISignIn, IUser } from '../../utils/Types/authenticationTypes';
+import { Factory } from '../../utils/Others/Factory';
 
-const database = new authenticationRepository();
-const service = new AuthenticationService(database);
+const service = Factory.authenticationLogic();
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -20,7 +18,8 @@ export const register = async (req: Request, res: Response) => {
     };
 
     const result = await service.createUser(userInformaton);
-    res.json({ result });
+
+    res.status(result.status).json({ data: result.message });
   } catch (error) {
     console.log('registerController:', error);
     res.status(500).json({ error });
@@ -29,10 +28,10 @@ export const register = async (req: Request, res: Response) => {
 
 export const signIn = async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body as { email: string; password: string };
+    const { email, password } = req.body as ISignIn;
 
     const result = await service.signInUser(email, password);
-    res.json({ result });
+    res.status(result.status).json({ data: result.message });
   } catch (error) {
     console.log('signInController:', error);
     res.status(500).json({ error });

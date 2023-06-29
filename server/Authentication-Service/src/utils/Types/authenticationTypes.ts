@@ -7,11 +7,15 @@ export interface IUser {
   username: string;
   password: string;
   image?: string;
-  salt?:string;
+  salt?: string;
+}
+export interface ISignIn {
+  email: string;
+  password: string;
 }
 
 export interface IAuthentication {
-  createUser_Repo(values: IUser): void;
-  signInUser_Repo(username: string, password: string): void;
-  getUserByEmail(email: string): void;
+  createUser_Repo(values: IUser): any;
+  signInUser_Repo(username: string, password: string): any;
+  getUserByEmail(email: string): any;
 }

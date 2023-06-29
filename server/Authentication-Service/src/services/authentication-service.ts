@@ -1,31 +1,44 @@
-import { authenticationRepository } from '../database/authentication-database';
 import { genSalt, passwordDecrypt, passwordEncrypt } from '../utils/Others/encryption';
-import { IUser } from '../utils/Types/authenticationTypes';
+import { IAuthentication, IUser } from '../utils/Types/authenticationTypes';
 
 export class AuthenticationService {
-  constructor(private _authenticationRespositiory: authenticationRepository) {}
+  constructor(private _authenticationRespositiory: IAuthentication) {}
 
   //Register Service
   public async createUser(values: IUser) {
     try {
       if (!values) {
-        return 'Incomplete Data';
+        return {
+          status: 401,
+          message: 'Incomplete Data',
+        };
       }
 
       //encrypt password & check if theres an error in encryption
       const salt = await genSalt();
       const hashedPass = await passwordEncrypt(values.password, salt);
       if (!hashedPass) {
-        return 'Password not hashed';
+        return {
+          status: 401,
+          message: 'Incorrect Password',
+        };
       }
 
       //changed password into hashed password
       values.salt = salt;
       values.password = hashedPass;
 
-      return await this._authenticationRespositiory.createUser_Repo(values);
+      const createdUser = await this._authenticationRespositiory.createUser_Repo(values);
+      return {
+        status: 200,
+        message: createdUser,
+      };
     } catch (error) {
       console.log('createUser AuthService:', error);
+      return {
+        status: 500,
+        message: error,
+      };
     }
   }
 
@@ -34,25 +47,41 @@ export class AuthenticationService {
     try {
       //checks if username and password have value
       if (!email || !password) {
-        return 'Incomplete Data';
+        return {
+          status: 401,
+          message: 'Incomplete Data',
+        };
       }
 
       //fetch data from the database
       const existingUser = await this._authenticationRespositiory.getUserByEmail(email);
       //checks if user exists
       if (!existingUser) {
-        return 'User does not exist';
+        return {
+          status: 401,
+          message: 'User does not exist',
+        };
       }
 
       //compare the password
       const result = await passwordDecrypt(password, existingUser.password);
       if (!result) {
-        return 'Incorrect Password';
+        return {
+          status: 401,
+          message: 'Incorrect Password',
+        };
       }
 
-      return existingUser;
+      return {
+        status: 200,
+        message: existingUser,
+      };
     } catch (error) {
       console.log('SignIn User AuthService:', error);
+      return {
+        status: 500,
+        message: error,
+      };
     }
   }
 }
