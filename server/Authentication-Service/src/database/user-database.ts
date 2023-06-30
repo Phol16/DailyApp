@@ -1,6 +1,6 @@
 import prisma from './prismadb';
 
-import { IUserFunctionality } from '../utils/Types/dataTypes';
+import { IUser, IUserFunctionality } from '../utils/Types/dataTypes';
 
 export class userRepository implements IUserFunctionality {
   //get all user from database
@@ -30,18 +30,35 @@ export class userRepository implements IUserFunctionality {
   }
 
   //update user information
-  public udapteUser(id: number, value: Record<string, any>) {
+  public udapteUser(id: number, value: IUser) {
     try {
-      
+      return prisma.user.update({
+        where: {
+          id,
+        },
+        data: {
+          firstName: value.firstName,
+          lastName: value.lastName,
+          username: value.username,
+        },
+      });
     } catch (error) {
-      console.log('updateUser Repo:', error)
+      console.log('updateUser Repo:', error);
     }
   }
 
-  //delete user 
-  deleteUser(id: number): string {
+  //delete user
+  public deleteUser(id: number): string {
     try {
-      return 'deleted';
+       prisma.user.update({
+        where: {
+          id,
+        },
+        data: {
+          deletedAt: Date(),
+        },
+      });
+      return 'Deleted';
     } catch (error) {
       console.log('deleteUser Repo:', error);
       return 'Something went wrong';

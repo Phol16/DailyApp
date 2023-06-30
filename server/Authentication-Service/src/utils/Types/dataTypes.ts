@@ -19,7 +19,7 @@ export interface IAuthentication {
 
 export interface IUserFunctionality {
   getCurrentUser(id: number): any;
-  udapteUser(id: number, value: Record<string, any>): any;
+  udapteUser(id: number, value: IUser): any;
   deleteUser(id: number): string;
   getAllUser(): any;
 }

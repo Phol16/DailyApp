@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { ISignIn, IUser } from '../../utils/Types/dataTypes';
 import { factory } from '../../utils/Others/factory';
 
-const service = factory.authenticationLogic();
+const AuthServices = factory.authenticationLogic();
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -17,7 +17,7 @@ export const register = async (req: Request, res: Response) => {
       image,
     };
 
-    const result = await service.createUser(userInformaton);
+    const result = await AuthServices.createUser(userInformaton);
 
     res.status(result.status).json({ data: result.message });
   } catch (error) {
@@ -30,7 +30,7 @@ export const signIn = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body as ISignIn;
 
-    const result = await service.signInUser(email, password);
+    const result = await AuthServices.signInUser(email, password);
 
     res.status(result.status).json({ data: result.message });
   } catch (error) {
