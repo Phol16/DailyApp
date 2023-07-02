@@ -16,6 +16,7 @@ const validateCurrentUser = async (req: Request, res: Response) => {
     const result = await UserServices.fetchCurrentUserInformation(
       parseInt(authId.message)
     );
+    //TodoSomething
 
   } catch (error) {
     console.log('currentUserController:', error);
