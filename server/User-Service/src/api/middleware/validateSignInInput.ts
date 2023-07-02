@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+
 import { ISignIn } from '../../utils/Types/dataTypes';
 
 const validateSignInInput = async (req: Request, res: Response, next: NextFunction) => {

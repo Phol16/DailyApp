@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import { register, signIn } from '../controller/authentication';
 
 import validateRegisterInput from '../middleware/validateRegisterInput';

@@ -1,8 +1,14 @@
-import { genSalt, passwordDecrypt, passwordEncrypt } from '../utils/Others/encryption';
-import { IAuthentication, IUser } from '../utils/Types/dataTypes';
+import {
+  IAuthentication,
+  IEncryptionFunctionality,
+  IUser,
+} from '../utils/Types/dataTypes';
 
 export class authenticationService {
-  constructor(private _authenticationRespositiory: IAuthentication) {}
+  constructor(
+    private _authenticationRespositiory: IAuthentication,
+    private _classEncrypt: IEncryptionFunctionality
+  ) {}
 
   //Register Service
   public async createUser(values: IUser) {
@@ -15,8 +21,8 @@ export class authenticationService {
       }
 
       //encrypt password & check if theres an error in encryption
-      const salt = await genSalt();
-      const hashedPass = await passwordEncrypt(values.password, salt);
+      const salt = await this._classEncrypt.genSalt();
+      const hashedPass = await this._classEncrypt.passwordEncrypt(values.password, salt);
       if (!hashedPass) {
         return {
           status: 401,
@@ -64,7 +70,10 @@ export class authenticationService {
       }
 
       //compare the password
-      const result = await passwordDecrypt(password, existingUser.password);
+      const result = await this._classEncrypt.passwordDecrypt(
+        password,
+        existingUser.password
+      );
       if (!result) {
         return {
           status: 401,

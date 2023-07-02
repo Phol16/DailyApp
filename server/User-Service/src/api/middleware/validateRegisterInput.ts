@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+
 import { IUser } from '../../utils/Types/dataTypes';
 
 const validateRegisterInput = (req: Request, res: Response, next: NextFunction) => {

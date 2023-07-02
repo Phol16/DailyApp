@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+
 import { ISignIn, IUser } from '../../utils/Types/dataTypes';
 import { factory } from '../../utils/Others/factory';
 
