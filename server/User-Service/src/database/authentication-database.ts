@@ -1,8 +1,8 @@
 import prisma from './prismadb';
 
-import { IUser, IAuthentication } from '../utils/Types/dataTypes';
+import { IUser, IAuthRepoFunctionality} from '../utils/Types/dataTypes';
 
-export class authenticationRepository implements IAuthentication {
+export class authenticationRepository implements IAuthRepoFunctionality {
   //register user to the database
   public createUser(values: IUser) {
     try {

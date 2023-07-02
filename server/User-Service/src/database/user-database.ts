@@ -1,8 +1,8 @@
 import prisma from './prismadb';
 
-import { IUser, IUserFunctionality } from '../utils/Types/dataTypes';
+import { IUser, IUserRepoFunctionality } from '../utils/Types/dataTypes';
 
-export class userRepository implements IUserFunctionality {
+export class userRepository implements IUserRepoFunctionality {
   //get all user from database
   public getAllUser() {
     try {

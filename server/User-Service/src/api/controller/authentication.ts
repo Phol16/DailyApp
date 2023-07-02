@@ -18,7 +18,7 @@ export const register = async (req: Request, res: Response) => {
       image,
     };
 
-    const result = await AuthServices.createUser(userInformaton);
+    const result = await AuthServices.createUserService(userInformaton);
 
     res.status(result.status).json({ data: result.message });
   } catch (error) {

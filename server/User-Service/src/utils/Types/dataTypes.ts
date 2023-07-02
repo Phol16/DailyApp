@@ -16,19 +16,25 @@ export interface Iresult {
   message: any;
 }
 
-export interface IAuthentication {
+export interface IAuthRepoFunctionality {
   createUser(values: IUser): any;
   getUserByEmail(email: string): any;
 }
 
-export interface IUserFunctionality {
+export interface IAuthServiceFunctionality {
+  createUserService(value: IUser): Promise<Iresult>;
+  signInUser(email: string, password: string): Promise<Iresult>;
+}
+
+export interface IUserRepoFunctionality {
   getCurrentUser(id: number): any;
   udapteUser(id: number, value: IUser): any;
   deleteUser(id: number): string;
   getAllUser(): any;
 }
+
 export interface IEncryptionFunctionality {
   genSalt(): any;
-  passwordEncrypt(password:string, salt:string): any;
-  passwordDecrypt(password:string, salt:string): any;
+  passwordEncrypt(password: string, salt: string): any;
+  passwordDecrypt(password: string, salt: string): any;
 }

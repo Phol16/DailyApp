@@ -1,17 +1,18 @@
 import {
-  IAuthentication,
+  IAuthRepoFunctionality,
   IEncryptionFunctionality,
   IUser,
+  IAuthServiceFunctionality,
 } from '../utils/Types/dataTypes';
 
-export class authenticationService {
+export class authenticationService implements IAuthServiceFunctionality{
   constructor(
-    private _authenticationRespositiory: IAuthentication,
+    private _authenticationRespositiory: IAuthRepoFunctionality,
     private _classEncrypt: IEncryptionFunctionality
   ) {}
 
   //Register Service
-  public async createUser(values: IUser) {
+  public async createUserService(values: IUser) {
     try {
       if (!values) {
         return {

@@ -1,7 +1,7 @@
-import { IUserFunctionality } from '../utils/Types/dataTypes';
+import { IUserRepoFunctionality } from '../utils/Types/dataTypes';
 
 export class userService {
-  constructor(private _userRepostory: IUserFunctionality) {}
+  constructor(private _userRepostory: IUserRepoFunctionality) {}
 
   public async fetchCurrentUserInformation(id: number) {
     try {
