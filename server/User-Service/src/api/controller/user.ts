@@ -15,3 +15,5 @@ export const getUserInfo = (req: Request, res: Response) => {
     res.status(500).json({ error });
   }
 };
+
+//Todo User APIs

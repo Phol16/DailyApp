@@ -4,5 +4,6 @@ import { getUserInfo } from '../controller/user';
 
 export default (router:Router)=>{
   router.get('/user/userInfo', validateCurrentUser, getUserInfo)
+  //Todo userAPI routes
   return router
 }

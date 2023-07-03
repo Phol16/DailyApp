@@ -38,10 +38,12 @@ export class userService implements IUserServiceFunctionality {
   }
 
   public async updateUserInfo(): Promise<Iresult> {
+    //Todo updateUserInfo codes
     throw new Error('Method not implemented.');
   }
 
   public async deleteUserInfo(): Promise<Iresult> {
+    //Todo deleteUserInfo codes
     throw new Error('Method not implemented.');
   }
 }
