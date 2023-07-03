@@ -1,28 +1,47 @@
-import { IUserRepoFunctionality } from '../utils/Types/dataTypes';
+import {
+  IUserRepoFunctionality,
+  IUserServiceFunctionality,
+  Iresult,
+} from '../utils/Types/dataTypes';
 
-export class userService {
+export class userService implements IUserServiceFunctionality {
   constructor(private _userRepostory: IUserRepoFunctionality) {}
 
-  public async fetchCurrentUserInformation(id: number) {
+  public async fetchUserInfo(id: number): Promise<Iresult> {
     try {
-      if (!id && typeof id !== 'number') {
+      if (!id) {
         return {
-          status: 400,
-          message: 'Invalid ID',
+          status: 404,
+          message: 'Missing Id',
         };
       }
 
-      const currentUserInformation = await this._userRepostory.getCurrentUser(id);
+      const result = await this._userRepostory.getCurrentUser(id);
+      if (!result) {
+        return {
+          status: 404,
+          message: 'User does not exist',
+        };
+      }
+
       return {
         status: 200,
-        message: currentUserInformation,
+        message: result,
       };
     } catch (error) {
-      console.log('fetchCurrentUserInformation userService:', error);
+      console.log('fetchUserInfo userService:', error);
       return {
         status: 500,
-        message: error,
+        message: 'Something went wrong',
       };
     }
+  }
+
+  public async updateUserInfo(): Promise<Iresult> {
+    throw new Error('Method not implemented.');
+  }
+
+  public async deleteUserInfo(): Promise<Iresult> {
+    throw new Error('Method not implemented.');
   }
 }

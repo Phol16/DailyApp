@@ -22,7 +22,7 @@ export const register = async (req: Request, res: Response) => {
 
     res.status(result.status).json({ data: result.message });
   } catch (error) {
-    console.log('registerController:', error);
+    console.log('register Controller:', error);
     res.status(500).json({ error });
   }
 };
@@ -35,7 +35,7 @@ export const signIn = async (req: Request, res: Response) => {
 
     res.status(result.status).json({ data: result.message });
   } catch (error) {
-    console.log('signInController:', error);
+    console.log('signIn Controller:', error);
     res.status(500).json({ error });
   }
 };

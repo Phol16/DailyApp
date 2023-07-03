@@ -5,7 +5,7 @@ import {
   IAuthServiceFunctionality,
 } from '../utils/Types/dataTypes';
 
-export class authenticationService implements IAuthServiceFunctionality{
+export class authenticationService implements IAuthServiceFunctionality {
   constructor(
     private _authenticationRespositiory: IAuthRepoFunctionality,
     private _classEncrypt: IEncryptionFunctionality
@@ -18,6 +18,16 @@ export class authenticationService implements IAuthServiceFunctionality{
         return {
           status: 401,
           message: 'Incomplete Data',
+        };
+      }
+
+      const existingUser = await this._authenticationRespositiory.getUserByEmail(
+        values.email
+      );
+      if (existingUser) {
+        return {
+          status: 500,
+          message: 'User Email Already Exist',
         };
       }
 
@@ -87,7 +97,7 @@ export class authenticationService implements IAuthServiceFunctionality{
         message: existingUser,
       };
     } catch (error) {
-      console.log('SignIn User AuthService:', error);
+      console.log('SignInUser AuthService:', error);
       return {
         status: 500,
         message: error,

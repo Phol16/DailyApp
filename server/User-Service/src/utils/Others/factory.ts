@@ -11,9 +11,9 @@ import {
   IAuthServiceFunctionality,
   IEncryptionFunctionality,
   IUserRepoFunctionality,
+  IUserServiceFunctionality,
   Iresult,
 } from '../Types/dataTypes';
-
 
 export class factory {
   protected static authenticationRepoFunctions(): IAuthRepoFunctionality {
@@ -35,11 +35,11 @@ export class factory {
     );
   }
 
-  public static userLogic() {
+  public static userLogic(): IUserServiceFunctionality {
     return new userService(this.userRepoFunctions());
   }
 
-  public static getAuthHeaderLogic(value: string):Iresult {
+  public static getAuthHeaderLogic(value: string): Iresult {
     return getAuthHeader(value);
   }
 }

@@ -33,6 +33,12 @@ export interface IUserRepoFunctionality {
   getAllUser(): any;
 }
 
+export interface IUserServiceFunctionality {
+  fetchUserInfo(id: number): Promise<Iresult>;
+  updateUserInfo(): Promise<Iresult>;
+  deleteUserInfo(): Promise<Iresult>;
+}
+
 export interface IEncryptionFunctionality {
   genSalt(): any;
   passwordEncrypt(password: string, salt: string): any;
