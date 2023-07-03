@@ -5,7 +5,7 @@ import {
 } from '../utils/Types/dataTypes';
 
 export class userService implements IUserServiceFunctionality {
-  constructor(private _userRepostory: IUserRepoFunctionality) {}
+  constructor(private _userRepository: IUserRepoFunctionality) {}
 
   public async fetchUserInfo(id: number): Promise<Iresult> {
     try {
@@ -16,7 +16,7 @@ export class userService implements IUserServiceFunctionality {
         };
       }
 
-      const result = await this._userRepostory.getCurrentUser(id);
+      const result = await this._userRepository.getCurrentUser(id);
       if (!result) {
         return {
           status: 404,
