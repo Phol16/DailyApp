@@ -7,9 +7,9 @@ const UserServices = factory.userLogic();
 
 export const getUserInfo = (req: Request, res: Response) => {
   try {
-    const user = lodash.get(req, 'User');
+    const currentUser = lodash.get(req, 'currentUser');
 
-    res.status(200).json({ data: user });
+    res.status(200).json({ data: currentUser });
   } catch (error) {
     console.log('UserInfo Controller:', error);
     res.status(500).json({ error });

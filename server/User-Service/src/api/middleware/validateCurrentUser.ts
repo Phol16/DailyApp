@@ -21,7 +21,7 @@ const validateCurrentUser = async (req: Request, res: Response, next: NextFuncti
     }
 
     //merge result using lodash
-    lodash.merge(req, { User: result.message });
+    lodash.merge(req, { currentUser: result.message });
     next();
   } catch (error) {
     console.log('validateCurrentUser Controller:', error);
