@@ -8,8 +8,10 @@ import {
 export class userService implements IUserServiceFunctionality {
   constructor(private _userRepository: IUserRepoFunctionality) {}
 
+  //fetch user by Id Service
   public async fetchUserInfo(id: number): Promise<Iresult> {
     try {
+      //check if id has data
       if (!id) {
         return {
           status: 404,
@@ -17,6 +19,7 @@ export class userService implements IUserServiceFunctionality {
         };
       }
 
+      //fetching user from database & check if user exist
       const result = await this._userRepository.getCurrentUser(id);
       if (!result) {
         return {
@@ -38,8 +41,10 @@ export class userService implements IUserServiceFunctionality {
     }
   }
 
+  //update user information Service
   public async updateUserInfo(id: number, value: IUser): Promise<Iresult> {
     try {
+      //check if id has data
       if (!id) {
         return {
           status: 400,
@@ -47,6 +52,7 @@ export class userService implements IUserServiceFunctionality {
         };
       }
 
+      // check if value has data
       if (!value) {
         return {
           status: 400,
@@ -54,6 +60,7 @@ export class userService implements IUserServiceFunctionality {
         };
       }
 
+      //updating user in database & check if update was successful
       const result = await this._userRepository.udapteUser(id, value);
       if (!result) {
         return {
@@ -75,8 +82,10 @@ export class userService implements IUserServiceFunctionality {
     }
   }
 
+  //delete user information Service
   public async deleteUserInfo(id: number): Promise<Iresult> {
     try {
+      //check if id has data
       if (!id) {
         return {
           status: 400,
@@ -84,6 +93,7 @@ export class userService implements IUserServiceFunctionality {
         };
       }
 
+      //deleting user from database
       const result = await this._userRepository.deleteUser(id);
       if (!result) {
         return {
