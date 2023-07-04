@@ -52,13 +52,9 @@ export class userRepository implements IUserRepoFunctionality {
   //delete user
   public deleteUser(id: number) {
     try {
-      const date = new Date()
-      return prisma.user.update({
+      return prisma.user.delete({
         where: {
           id,
-        },
-        data: {
-          deletedAt: date,
         },
       });
     } catch (error) {
