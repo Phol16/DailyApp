@@ -1,4 +1,5 @@
 import {
+  IUser,
   IUserRepoFunctionality,
   IUserServiceFunctionality,
   Iresult,
@@ -37,13 +38,70 @@ export class userService implements IUserServiceFunctionality {
     }
   }
 
-  public async updateUserInfo(): Promise<Iresult> {
-    //Todo updateUserInfo codes
-    throw new Error('Method not implemented.');
+  public async updateUserInfo(id: number, value: IUser): Promise<Iresult> {
+    try {
+      if (!id) {
+        return {
+          status: 400,
+          message: 'Invalid Id',
+        };
+      }
+
+      if (!value) {
+        return {
+          status: 400,
+          message: 'Invalid User Details',
+        };
+      }
+
+      const result = await this._userRepository.udapteUser(id, value);
+      if (!result) {
+        return {
+          status: 400,
+          message: 'Something went wrong when updating',
+        };
+      }
+
+      return {
+        status: 200,
+        message: result,
+      };
+    } catch (error) {
+      console.error('updateUserInfo userService:', error);
+      return {
+        status: 500,
+        message: 'Something went wrong',
+      };
+    }
   }
 
-  public async deleteUserInfo(): Promise<Iresult> {
-    //Todo deleteUserInfo codes
-    throw new Error('Method not implemented.');
+  public async deleteUserInfo(id: number): Promise<Iresult> {
+    try {
+      if (!id) {
+        return {
+          status: 400,
+          message: 'Invalid Id',
+        };
+      }
+
+      const result = await this._userRepository.deleteUser(id);
+      if (!result) {
+        return {
+          status: 400,
+          message: 'Something went wrong when deleting',
+        };
+      }
+
+      return {
+        status: 200,
+        message: result,
+      };
+    } catch (error) {
+      console.log('deleteUserInfo userService:', error);
+      return {
+        status: 500,
+        message: 'Something went wrong',
+      };
+    }
   }
 }

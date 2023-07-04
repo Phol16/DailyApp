@@ -19,9 +19,10 @@ export class userRepository implements IUserRepoFunctionality {
   //get current user information
   public getCurrentUser(id: number) {
     try {
-      return prisma.user.findUnique({
+      return prisma.user.findFirst({
         where: {
           id,
+          deletedAt: null,
         },
       });
     } catch (error) {
@@ -48,20 +49,19 @@ export class userRepository implements IUserRepoFunctionality {
   }
 
   //delete user
-  public deleteUser(id: number): string {
+  public deleteUser(id: number) {
     try {
-       prisma.user.update({
+      const date = new Date()
+      return prisma.user.update({
         where: {
           id,
         },
         data: {
-          deletedAt: Date(),
+          deletedAt: date,
         },
       });
-      return 'Deleted';
     } catch (error) {
       console.log('deleteUser Repo:', error);
-      return 'Something went wrong';
     }
   }
 }

@@ -14,7 +14,8 @@ model user {
   username  String    @db.VarChar(255)
   password  String    @db.VarChar(255)
   image     String?   @db.VarChar(255)
-  deletedAt DateTime? @db.Date
+  deletedAt DateTime?
   email     String    @unique @db.VarChar(255)
   salt      String    @db.VarChar(255)
+  created_At DateTime @default(now())
 }

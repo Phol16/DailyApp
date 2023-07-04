@@ -1,9 +1,11 @@
-import {Router} from 'express';
-import validateCurrentUser from '../middleware/validateCurrentUser';
-import { getUserInfo } from '../controller/user';
+import { Router } from 'express';
 
-export default (router:Router)=>{
-  router.get('/user/userInfo', validateCurrentUser, getUserInfo)
-  //Todo userAPI routes
-  return router
-}
+import validateCurrentUser from '../middleware/validateCurrentUser';
+import { deleteUserInfo, getUserInfo, updateUserInfo } from '../controller/user';
+
+export default (router: Router) => {
+  router.get('/user/userInfo', validateCurrentUser, getUserInfo);
+  router.put('/user/userInfo', validateCurrentUser, updateUserInfo);
+  router.delete('/user/userInfo', validateCurrentUser, deleteUserInfo);
+  return router;
+};
