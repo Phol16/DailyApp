@@ -40,6 +40,7 @@ export class userRepository implements IUserRepoFunctionality {
         data: {
           firstName: value.firstName,
           lastName: value.lastName,
+          image: value.image,
           username: value.username,
         },
       });

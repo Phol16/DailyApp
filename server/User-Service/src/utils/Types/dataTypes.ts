@@ -8,7 +8,7 @@ export interface IUser extends ISignIn {
   firstName: string;
   lastName: string;
   username: string;
-  image?: string;
+  image?: string | null;
   salt?: string;
 }
 

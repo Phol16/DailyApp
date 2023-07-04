@@ -19,13 +19,17 @@ export const getUserInfo = (req: Request, res: Response) => {
 
 export const updateUserInfo = async (req: Request, res: Response) => {
   try {
-    const { firstName, lastName, username, image } = req.body as IUser;
+    let { firstName, lastName, username, image } = req.body as IUser;
     const currentUser = lodash.get(req, 'currentUser') as unknown as IUser;
     if (!currentUser) {
       return res.status(500).json({ data: 'currentUser details are missing' });
     }
 
     const currentUserId = currentUser.id as number;
+
+    if (!image) {
+      image = null;
+    }
 
     const updatedUser = {
       firstName,

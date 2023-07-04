@@ -43,6 +43,7 @@ export class authenticationRepository implements IAuthRepoFunctionality {
       return prisma.user.findFirst({
         where: {
           email,
+          deletedAt:null
         },
       });
     } catch (error) {
