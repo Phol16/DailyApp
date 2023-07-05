@@ -3,4 +3,4 @@
 ## Application In Progress...
 
 
-### FrontEnd: NextJS /BackEnd:ExpressJS / Language:Typescript
+### FrontEnd: NextJS || Svelte /BackEnd:ExpressJS / Language:Typescript
