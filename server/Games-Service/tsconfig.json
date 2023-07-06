@@ -107,5 +107,5 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
   "include": ["./src/**/*.ts", "**/*.ts", ".ts", "./test/**/*.ts", "vitest.config.mts"],
-  "exclude": ["node_modules", ".env"]
+  "exclude": ["node_modules", ".env","test-report.json"]
 }
