@@ -25,4 +25,10 @@ export interface IGameRepository {
   deleteGameRepository(id: number): Promise<IResult>;
 }
 
+export interface IGameServices {
+  createGameServices(values: IGamesInformation): Promise<IResult>;
+  updateGameServices(id: number, values: IGamesInformation): Promise<IResult>;
+  deleteGameServices(id: number): Promise<IResult>;
+}
+
 //todo create other interface

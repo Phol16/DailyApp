@@ -6,6 +6,4 @@ export class GamesFactory {
   protected static gameRepo(): IGameRepository {
     return new gamesRepository();
   }
-
-  //create other methods...
 }
