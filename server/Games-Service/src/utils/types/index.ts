@@ -1,10 +1,11 @@
 export interface IResult {
   status: number;
-  message: string | IPublisherInformation | IUser | {};
+  message: string | IPublisherInformation | IUser | {} | null;
 }
 
 export interface IUser {
   id?: number;
+  email: string;
   username: string;
   name: string;
   image: string;
@@ -31,4 +32,9 @@ export interface IGameServices {
   deleteGameServices(id: number): Promise<IResult>;
 }
 
-//todo create other interface
+export interface IPublisherService {
+  getPublisherByEmail(email: string): Promise<IResult>;
+  createPublisher(values: IPublisherInformation): Promise<IResult>;
+  updatePublisher(id: number, values: IPublisherInformation): Promise<IResult>;
+  deletePublisher(id: number): Promise<IResult>;
+}

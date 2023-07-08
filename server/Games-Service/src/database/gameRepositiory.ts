@@ -16,6 +16,7 @@ export class gamesRepository implements IGameRepository {
           publisher: {
             create: {
               id: values.publisher.id!,
+              email:values.publisher.email,
               name: values.publisher.name,
               image: values.publisher.image,
               username: values.publisher.username,
@@ -62,6 +63,7 @@ export class gamesRepository implements IGameRepository {
           publisher: {
             create: {
               id: values.publisher.id!,
+              email:values.publisher.email,
               name: values.publisher.name,
               image: values.publisher.image,
               username: values.publisher.username,
