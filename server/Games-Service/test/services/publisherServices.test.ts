@@ -42,17 +42,57 @@ describe('getPublisherByEmail', () => {
 });
 
 describe('createPublisher', () => {
-  it.todo('Should return status 200 and the data if function is success', () => {});
+  it('Should return status 200 and the data if function is success', async () => {
+    expect(await PublisherService_Test.createPublisher(values)).toEqual({
+      status: 200,
+      message: values,
+    });
+  });
 
-  it.todo('Should return status 404 if values is missing', () => {});
+  it('Should return status 404 if values is missing', async () => {
+    //@ts-ignore
+    expect(await PublisherService_Test.createPublisher(undefined)).toEqual({
+      status: 404,
+      message: 'Missing details',
+    });
+
+     //@ts-ignore
+     expect(await PublisherService_Test.createPublisher({})).toEqual({
+      status: 404,
+      message: 'Missing details',
+    });
+  });
 });
 
 describe('updatePublisher', () => {
-  it.todo('Should return status 200 and the data if function is success', () => {});
+  it('Should return status 200 and the data if function is success', async () => {
+    expect(await PublisherService_Test.updatePublisher(1, values)).toEqual({
+      status: 200,
+      message: values,
+    });
+  });
 
-  it.todo('Should return status 404 if values is missing', () => {});
+  it('Should return status 404 if values is missing', async () => {
+    //@ts-ignore
+    expect(await PublisherService_Test.updatePublisher(1, undefined)).toEqual({
+      status: 404,
+      message: 'Missing details',
+    });
 
-  it.todo('Should return status 404 if Id is missing', () => {});
+    //@ts-ignore
+    expect(await PublisherService_Test.updatePublisher(1, {})).toEqual({
+      status: 404,
+      message: 'Missing details',
+    });
+  });
+
+  it('Should return status 404 if Id is missing', async() => {
+    //@ts-ignore
+    expect(await PublisherService_Test.updatePublisher(undefined, values)).toEqual({
+      status:404,
+      message:'Missing Id'
+    })
+  });
 });
 
 describe('deletePublisher', () => {
@@ -62,5 +102,3 @@ describe('deletePublisher', () => {
 
   it.todo('Should return status 404 if Id is missing', () => {});
 });
-
-//Add Test here...
