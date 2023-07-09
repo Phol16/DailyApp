@@ -1,5 +1,3 @@
-// create gameservice class
-
 import {
   IGameRepository,
   IGameServices,

@@ -6,9 +6,9 @@ import {
 } from '../../src/utils/types';
 
 enum Estatus {
-  success = 200 ,
-  redirection = 300 ,
-  clientError = 400 |404 | 401,
+  success = 200,
+  redirection = 300,
+  clientError = 400 | 404 | 401,
   serverError = 500,
 }
 
@@ -41,14 +41,15 @@ export const mockGamesInformation: IGamesInformation = {
 };
 
 export const mockPublisherInformation: IPublisherInformation = {
+  id: 1,
   name: 'the publisher',
   email: 'publisher email',
   username: 'publisher username',
   image: 'publisher image',
 };
 
-export const mockuserIdInformation: IUser = {
-  id: 0,
+export const mockUserIdInformation: IUser = {
+  id: 1,
   username: 'the username',
   email: 'user email',
   name: 'the name',

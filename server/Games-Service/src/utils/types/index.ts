@@ -38,3 +38,10 @@ export interface IPublisherService {
   updatePublisher(id: number, values: IPublisherInformation): Promise<IResult>;
   deletePublisher(id: number): Promise<IResult>;
 }
+
+export interface IUserService {
+  getUserByEmail(email: string): Promise<IResult>;
+  createUser(values: IPublisherInformation): Promise<IResult>;
+  updateUser(id: number, values: IPublisherInformation): Promise<IResult>;
+  deleteUser(id: number): Promise<IResult>;
+}

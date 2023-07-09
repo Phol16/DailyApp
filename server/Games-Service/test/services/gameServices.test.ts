@@ -25,7 +25,7 @@ beforeEach(() => {
 
 describe('gameServices:', () => {
   //----------------------------------------------------------------------------------------------------//
-  describe('CreateGameService', () => {
+  describe('createGameService:', () => {
     it('Should return status 200 and the data if function is success', async () => {
       expect(await gameServices_Test.createGameServices(values)).toEqual({
         status: 200,
@@ -49,7 +49,7 @@ describe('gameServices:', () => {
   });
 
   //----------------------------------------------------------------------------------------------------//
-  describe('UpdateGameService', () => {
+  describe('updateGameService:', () => {
     it('Should return status 200 and the data if function is success', async () => {
       expect(await gameServices_Test.updateGameServices(1, values)).toEqual({
         status: 200,
@@ -81,7 +81,7 @@ describe('gameServices:', () => {
   });
 
   //----------------------------------------------------------------------------------------------------//
-  describe('DeleteGameService', () => {
+  describe('deleteGameService:', () => {
     it('Should return status 200 and the data if function is success', async () => {
       expect(await gameServices_Test.deleteGameServices(1)).toEqual({
         status: 200,

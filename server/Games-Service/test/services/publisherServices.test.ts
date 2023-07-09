@@ -26,7 +26,7 @@ beforeEach(() => {
 
 describe('publisherServices:', () => {
   //----------------------------------------------------------------------------------------------------//
-  describe('getPublisherByEmail', () => {
+  describe('getPublisherByEmail:', () => {
     it('Should return status 200 and the data if function is success', async () => {
       expect(await PublisherService_Test.getPublisherByEmail(values.email)).toEqual({
         status: 200,
@@ -44,7 +44,7 @@ describe('publisherServices:', () => {
   });
 
   //----------------------------------------------------------------------------------------------------//
-  describe('createPublisher', () => {
+  describe('createPublisher:', () => {
     it('Should return status 200 and the data if function is success', async () => {
       expect(await PublisherService_Test.createPublisher(values)).toEqual({
         status: 200,
@@ -68,7 +68,7 @@ describe('publisherServices:', () => {
   });
 
   //----------------------------------------------------------------------------------------------------//
-  describe('updatePublisher', () => {
+  describe('updatePublisher:', () => {
     it('Should return status 200 and the data if function is success', async () => {
       expect(await PublisherService_Test.updatePublisher(1, values)).toEqual({
         status: 200,
@@ -100,7 +100,7 @@ describe('publisherServices:', () => {
   });
 
   //----------------------------------------------------------------------------------------------------//
-  describe('deletePublisher', () => {
+  describe('deletePublisher:', () => {
     it('Should return status 200 and the data if function is success', async () => {
       expect(await PublisherService_Test.deletePublisher(1)).toEqual({
         status: 200,
