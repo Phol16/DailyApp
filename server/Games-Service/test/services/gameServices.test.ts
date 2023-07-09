@@ -3,19 +3,19 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { gameServices } from '../../src/services/gameServices';
 import { IGameServices } from '../../src/utils/types';
 
-import { mockGamesInformation } from '../utils/data-information';
+import { mockGamesInformation, mockedReturn } from '../utils/data-information';
 
 //mocked game informations
 let values = mockGamesInformation;
 
+let gameServices_Test: IGameServices;
+
 //mocked gameRepository functions
 const gameRepository_Mock = vi.fn(() => ({
-  createGameRepository: vi.fn().mockReturnValue({ status: 200, message: values }),
-  updateGameRepository: vi.fn().mockReturnValue({ status: 200, message: values }),
-  deleteGameRepository: vi.fn().mockReturnValue({ status: 200, message: values }),
+  createGameRepository: vi.fn().mockReturnValue(mockedReturn(200, values)),
+  updateGameRepository: vi.fn().mockReturnValue(mockedReturn(200, values)),
+  deleteGameRepository: vi.fn().mockReturnValue(mockedReturn(200, values)),
 }));
-
-let gameServices_Test: IGameServices;
 
 beforeEach(() => {
   values = mockGamesInformation;

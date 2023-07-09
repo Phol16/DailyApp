@@ -1,4 +1,26 @@
-import { IGamesInformation, IPublisherInformation, IUser } from '../../src/utils/types';
+import {
+  IGamesInformation,
+  IPublisherInformation,
+  IResult,
+  IUser,
+} from '../../src/utils/types';
+
+enum Estatus {
+  success = 200 ,
+  redirection = 300 ,
+  clientError = 400 |404 | 401,
+  serverError = 500,
+}
+
+export const mockedReturn = (
+  status: Estatus,
+  message: string | IPublisherInformation | IUser | {} | null
+): IResult => {
+  return {
+    status: status,
+    message: message,
+  };
+};
 
 export const mockGamesInformation: IGamesInformation = {
   title: 'the title',
