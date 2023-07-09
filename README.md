@@ -3,7 +3,7 @@
 ## Application In Progress...
 
 
-### FrontEnd: NextJS || Svelte 
+### FrontEnd: ReactJS || Svelte 
 
 ### BackEnd: NodeJS/ExpressJS
 
