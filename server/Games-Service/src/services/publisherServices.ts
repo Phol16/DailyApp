@@ -84,7 +84,27 @@ export class publisherServices implements IPublisherService {
     }
   }
 
-  deletePublisher(id: number): Promise<IResult> {
-    throw new Error('Method not implemented.');
+  public async deletePublisher(id: number): Promise<IResult> {
+    try {
+      if (!id) {
+        return {
+          status: 404,
+          message: 'Missing Id',
+        };
+      }
+
+      const result = await this._publisherRepository.deletePublisher(id);
+
+      return {
+        status: result.status,
+        message: result.message,
+      };
+    } catch (error) {
+      console.log('deletePublisher Service:', error);
+      return {
+        status: 500,
+        message: 'Something went wrong',
+      };
+    }
   }
 }
