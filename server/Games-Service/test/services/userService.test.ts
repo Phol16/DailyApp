@@ -1,4 +1,4 @@
-import { describe, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { mockUserIdInformation, mockedReturn } from '../utils/data-information';
 
@@ -26,14 +26,94 @@ beforeEach(() => {
 
 describe('userServices:', () => {
   //----------------------------------------------------------------------------------------------------//
-  describe('getUserByEmail:', () => {});
+  describe('getUserByEmail:', () => {
+    it('Shoule return status 200 and the data if function is success', async () => {
+      expect(await userServices_Test.getUserByEmail('the Email')).toEqual({
+        status: 200,
+        message: values,
+      });
+    });
+
+    it('Should return status 404 and error message if email is missing', async () => {
+      //@ts-ignore
+      expect(await userServices_Test.getUserByEmail(undefined)).toEqual({
+        status: 404,
+        message: 'Missing email',
+      });
+    });
+  });
 
   //----------------------------------------------------------------------------------------------------//
-  describe('createUser:', () => {});
+  describe('createUser:', () => {
+    it('Should return status 200 and the data if function is success', async () => {
+      expect(await userServices_Test.createUser(values)).toEqual({
+        status: 200,
+        message: values,
+      });
+    });
+
+    it('Should return status 404 and error message if values are missing', async () => {
+      //@ts-ignore
+      expect(await userServices_Test.createUser(undefined)).toEqual({
+        status: 404,
+        message: 'Missing details',
+      });
+
+      //@ts-ignore
+      expect(await userServices_Test.createUser({})).toEqual({
+        status: 404,
+        message: 'Missing details',
+      });
+    });
+  });
 
   //----------------------------------------------------------------------------------------------------//
-  describe('updateUser:', () => {});
+  describe('updateUser:', () => {
+    it('Should return status 200 and the data if function is success', async () => {
+      expect(await userServices_Test.updateUser(1, values)).toEqual({
+        status: 200,
+        message: values,
+      });
+    });
+
+    it('Should return status 404 and error message if Id is missing ', async () => {
+      //@ts-ignore
+      expect(await userServices_Test.updateUser(undefined, values)).toEqual({
+        status: 404,
+        message: 'Missing Id',
+      });
+    });
+
+    it('Should return status 404 and error message if values are missing', async () => {
+      //@ts-ignore
+      expect(await userServices_Test.updateUser(1, undefined)).toEqual({
+        status: 404,
+        message: 'Missing details',
+      });
+
+      //@ts-ignore
+      expect(await userServices_Test.updateUser(1, {})).toEqual({
+        status: 404,
+        message: 'Missing details',
+      });
+    });
+  });
 
   //----------------------------------------------------------------------------------------------------//
-  describe('deleteUser:', () => {});
+  describe('deleteUser:', () => {
+    it('Should return status 200 and the data if function is success', async () => {
+      expect(await userServices_Test.deleteUser(1)).toEqual({
+        status: 200,
+        message: values,
+      });
+    });
+
+    it('Should return status 404 and error message if Id is missing', async () => {
+      //@ts-ignore
+      expect(await userServices_Test.deleteUser(undefined)).toEqual({
+        status: 404,
+        message: 'Missing Id',
+      });
+    });
+  });
 });
