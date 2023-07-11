@@ -5,9 +5,10 @@ import { IUser, IAuthRepoFunctionality} from '../utils/Types/dataTypes';
 export class authenticationRepository implements IAuthRepoFunctionality {
   //register user to the database
   public createUser(values: IUser) {
+
     try {
       if (values.salt) {
-        if (values.image) {
+        if (values.image ) {
           return prisma.user.create({
             data: {
               firstName: values.firstName,
@@ -17,6 +18,7 @@ export class authenticationRepository implements IAuthRepoFunctionality {
               password: values.password,
               image: values.image,
               salt: values.salt,
+              role: values.role,
             },
           });
         } else {
@@ -28,6 +30,7 @@ export class authenticationRepository implements IAuthRepoFunctionality {
               username: values.username,
               password: values.password,
               salt: values.salt,
+              role: values.role
             },
           });
         }

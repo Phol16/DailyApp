@@ -38,6 +38,7 @@ export const updateUserInfo = async (req: Request, res: Response) => {
       image,
       email: currentUser.email,
       password: currentUser.password,
+      role: currentUser.role,
     };
 
     const result = await UserServices.updateUserInfo(currentUserId, updatedUser);

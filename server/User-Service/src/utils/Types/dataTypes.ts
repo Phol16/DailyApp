@@ -10,6 +10,7 @@ export interface IUser extends ISignIn {
   username: string;
   image?: string | null;
   salt?: string;
+  role: string;
 }
 
 export interface Iresult {

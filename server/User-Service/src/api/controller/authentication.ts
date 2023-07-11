@@ -7,7 +7,8 @@ const AuthServices = factory.authenticationLogic();
 
 export const register = async (req: Request, res: Response) => {
   try {
-    const { firstName, lastName, email, username, password, image } = req.body as IUser;
+    const { firstName, lastName, email, username, password, image, role } =
+      req.body as IUser;
 
     const userInformaton: IUser = {
       firstName,
@@ -16,6 +17,7 @@ export const register = async (req: Request, res: Response) => {
       username,
       password,
       image,
+      role,
     };
 
     const result = await AuthServices.createUserService(userInformaton);
