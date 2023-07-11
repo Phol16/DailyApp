@@ -2,6 +2,32 @@ import { IGameRepository, IGamesInformation, IResult } from '../utils/types';
 import prisma from './prismadb';
 
 export class gamesRepository implements IGameRepository {
+  //findGameById
+  public async findGameById(id: number): Promise<IResult> {
+    try {
+      if (!id) {
+        throw new Error('Missing Id');
+      }
+
+      const result = await prisma.games.findFirst({
+        where: {
+          id,
+        },
+      });
+
+      return {
+        status: 200,
+        message: result,
+      };
+    } catch (error) {
+      console.log('findGameById Repo:', error);
+      return {
+        status: 500,
+        message: 'Something went wrong',
+      };
+    }
+  }
+
   //create game information
   public async createGameRepository(values: IGamesInformation): Promise<IResult> {
     try {
@@ -16,7 +42,7 @@ export class gamesRepository implements IGameRepository {
           publisher: {
             create: {
               id: values.publisher.id!,
-              email:values.publisher.email,
+              email: values.publisher.email,
               name: values.publisher.name,
               image: values.publisher.image,
               username: values.publisher.username,
@@ -63,7 +89,7 @@ export class gamesRepository implements IGameRepository {
           publisher: {
             create: {
               id: values.publisher.id!,
-              email:values.publisher.email,
+              email: values.publisher.email,
               name: values.publisher.name,
               image: values.publisher.image,
               username: values.publisher.username,
@@ -89,6 +115,8 @@ export class gamesRepository implements IGameRepository {
       };
     }
   }
+
+  //delete game information
   public async deleteGameRepository(id: number): Promise<IResult> {
     try {
       if (!id) {

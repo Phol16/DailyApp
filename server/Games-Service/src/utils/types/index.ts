@@ -21,6 +21,7 @@ export interface IGamesInformation {
 }
 
 export interface IGameRepository {
+  findGameById(id: number): Promise<IResult>;
   createGameRepository(values: IGamesInformation): Promise<IResult>;
   updateGameRepository(id: number, values: IGamesInformation): Promise<IResult>;
   deleteGameRepository(id: number): Promise<IResult>;

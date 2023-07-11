@@ -12,6 +12,7 @@ let gameServices_Test: IGameServices;
 
 //mocked gameRepository functions
 const gameRepository_Mock = vi.fn(() => ({
+  findGameById: vi.fn().mockReturnValue(mockedReturn(200, values)),
   createGameRepository: vi.fn().mockReturnValue(mockedReturn(200, values)),
   updateGameRepository: vi.fn().mockReturnValue(mockedReturn(200, values)),
   deleteGameRepository: vi.fn().mockReturnValue(mockedReturn(200, values)),
