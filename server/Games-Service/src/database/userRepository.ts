@@ -1,8 +1,8 @@
 import prisma from './prismadb';
 
-import { IPublisherInformation, IResult, IUserService } from '../utils/types';
+import { IPublisherInformation, IResult, IUserRepository } from '../utils/types';
 
-export class userRepository implements IUserService {
+export class userRepository implements IUserRepository {
   public async getUserByEmail(email: string): Promise<IResult> {
     try {
       if (!email) {
@@ -13,6 +13,10 @@ export class userRepository implements IUserService {
           email,
         },
       });
+
+      if(Object.keys(result!).length === 0){
+        throw new Error('Missing User')
+      }
 
       return {
         status: 200,

@@ -8,6 +8,47 @@ import {
 export class gameServices implements IGameServices {
   constructor(private _gameRepository: IGameRepository) {}
 
+  public async fetchAllGamesService(): Promise<IResult> {
+    try {
+      const result = await this._gameRepository.getAllGames();
+
+      return {
+        status: result.status,
+        message: result.message,
+      };
+    } catch (error) {
+      console.log('fetchallGames Service Services:', error);
+      return {
+        status: 500,
+        message: 'Somethign went wrong',
+      };
+    }
+  }
+
+  public async fetchUserGameService(id: number): Promise<IResult> {
+    try {
+      if (!id) {
+        return {
+          status: 404,
+          message: 'Missing Id',
+        };
+      }
+
+      const result = await this._gameRepository.findGameById(id);
+
+      return {
+        status: result.status,
+        message: result.message,
+      };
+    } catch (error) {
+      console.log('fetchUserGameService Services:', error);
+      return {
+        status: 500,
+        message: 'Something went wrong',
+      };
+    }
+  }
+
   public async createGameServices(values: IGamesInformation): Promise<IResult> {
     try {
       if (!values || Object.keys(values).length === 0) {

@@ -9,9 +9,9 @@ export class gamesRepository implements IGameRepository {
         throw new Error('Missing Id');
       }
 
-      const result = await prisma.games.findFirst({
+      const result = await prisma.userGames.findMany({
         where: {
-          id,
+          userId: id,
         },
       });
 
@@ -25,6 +25,21 @@ export class gamesRepository implements IGameRepository {
         status: 500,
         message: 'Something went wrong',
       };
+    }
+  }
+
+  //getAllGames
+  public async getAllGames(): Promise<IResult> {
+    try {
+      const result = await prisma.games.findMany({});
+
+      return {
+        status: 200,
+        message: result,
+      };
+    } catch (error) {
+      console.log('getAllGames', error);
+      return { status: 500, message: 'Something went wrong' };
     }
   }
 

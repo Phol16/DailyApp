@@ -1,31 +1,7 @@
-import { IPublisherInformation, IResult, IUserService } from '../utils/types';
+import { IPublisherInformation, IResult, IUserRepository, IUserService } from '../utils/types';
 
 export class userServices implements IUserService {
-  constructor(private _userRepository: IUserService) {}
-
-  public async getUserByEmail(email: string): Promise<IResult> {
-    try {
-      if (!email) {
-        return {
-          status: 404,
-          message: 'Missing email',
-        };
-      }
-
-      const result = await this._userRepository.getUserByEmail(email);
-
-      return {
-        status: result.status,
-        message: result.message,
-      };
-    } catch (error) {
-      console.log('getUserByEmail Service:', error);
-      return {
-        status: 500,
-        message: 'Something went wrong',
-      };
-    }
-  }
+  constructor(private _userRepository: IUserRepository) {}
 
   public async createUser(values: IPublisherInformation): Promise<IResult> {
     try {
@@ -34,6 +10,14 @@ export class userServices implements IUserService {
           status: 404,
           message: 'Missing details',
         };
+      }
+
+      const existingUser = await this._userRepository.getUserByEmail(values.email);
+      if(existingUser.status === 200){
+        return {
+          status:201,
+          message:'User already exist'
+        }
       }
 
       const result = await this._userRepository.createUser(values);

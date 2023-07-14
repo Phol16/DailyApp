@@ -26,29 +26,27 @@ beforeEach(() => {
 
 describe('publisherServices:', () => {
   //----------------------------------------------------------------------------------------------------//
-  describe('getPublisherByEmail:', () => {
-    it('Should return status 200 and the data if function is success', async () => {
-      expect(await PublisherService_Test.getPublisherByEmail(values.email)).toEqual({
-        status: 200,
-        message: values,
-      });
-    });
-
-    it('Should return status 404 and the error if email doesnt exist', async () => {
-      //@ts-ignore
-      expect(await PublisherService_Test.getPublisherByEmail(undefined)).toEqual({
-        status: 404,
-        message: 'Missing details',
-      });
-    });
-  });
-
-  //----------------------------------------------------------------------------------------------------//
   describe('createPublisher:', () => {
     it('Should return status 200 and the data if function is success', async () => {
+      const PublisherRepo = vi.fn(() => ({
+        //@ts-ignore
+        getPublisherByEmail: vi.fn().mockReturnValue(mockedReturn(500, undefined)),
+        createPublisher: vi.fn().mockReturnValue(mockedReturn(200, values)),
+      }));
+
+      //@ts-ignore
+      PublisherService_Test = new publisherServices(new PublisherRepo());
+
       expect(await PublisherService_Test.createPublisher(values)).toEqual({
         status: 200,
         message: values,
+      });
+    });
+
+    it('Should return status ... and the error message if user already exist in DB', async () => {
+      expect(await PublisherService_Test.createPublisher(values)).toEqual({
+        status: 201,
+        message: 'User already exist',
       });
     });
 

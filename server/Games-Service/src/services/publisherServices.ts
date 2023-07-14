@@ -1,31 +1,12 @@
-import { IPublisherInformation, IPublisherService, IResult } from '../utils/types';
+import {
+  IPublisherInformation,
+  IPublisherRepository,
+  IPublisherService,
+  IResult,
+} from '../utils/types';
 
 export class publisherServices implements IPublisherService {
-  constructor(private _publisherRepository: IPublisherService) {}
-
-  public async getPublisherByEmail(email: string): Promise<IResult> {
-    try {
-      if (!email) {
-        return {
-          status: 404,
-          message: 'Missing details',
-        };
-      }
-
-      const result = await this._publisherRepository.getPublisherByEmail(email);
-
-      return {
-        status: result.status,
-        message: result.message,
-      };
-    } catch (error) {
-      console.log('getPublisherByEmail Service:', error);
-      return {
-        status: 500,
-        message: 'Something went wrong',
-      };
-    }
-  }
+  constructor(private _publisherRepository: IPublisherRepository) {}
 
   public async createPublisher(values: IPublisherInformation): Promise<IResult> {
     try {
@@ -33,6 +14,16 @@ export class publisherServices implements IPublisherService {
         return {
           status: 404,
           message: 'Missing details',
+        };
+      }
+
+      const existingPublisher = await this._publisherRepository.getPublisherByEmail(
+        values.email
+      );
+      if (existingPublisher.status === 200) {
+        return {
+          status: 201,
+          message: 'User already exist',
         };
       }
 

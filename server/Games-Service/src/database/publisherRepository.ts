@@ -1,8 +1,8 @@
 import prisma from './prismadb';
 
-import { IPublisherInformation, IPublisherService, IResult } from '../utils/types';
+import { IPublisherInformation, IPublisherRepository, IResult } from '../utils/types';
 
-export class publisherRepsoitory implements IPublisherService {
+export class publisherRepsoitory implements IPublisherRepository {
   public async getPublisherByEmail(email: string): Promise<IResult> {
     try {
       if (!email) {
@@ -12,7 +12,11 @@ export class publisherRepsoitory implements IPublisherService {
         where: {
           email,
         },
-      });
+      })
+      
+      if( Object.keys(result!).length === 0){
+        throw new Error('Missing Publisher')
+      }
 
       return {
         status: 200,

@@ -12,6 +12,7 @@ let gameServices_Test: IGameServices;
 
 //mocked gameRepository functions
 const gameRepository_Mock = vi.fn(() => ({
+  getAllGames: vi.fn().mockReturnValue(mockedReturn(200, values)),
   findGameById: vi.fn().mockReturnValue(mockedReturn(200, values)),
   createGameRepository: vi.fn().mockReturnValue(mockedReturn(200, values)),
   updateGameRepository: vi.fn().mockReturnValue(mockedReturn(200, values)),
@@ -25,6 +26,34 @@ beforeEach(() => {
 });
 
 describe('gameServices:', () => {
+  //----------------------------------------------------------------------------------------------------//
+  describe('fetchAllGamesService', () => {
+    it('Should return status 200 and the data if function is successful', async () => {
+      expect(await gameServices_Test.fetchAllGamesService()).toEqual({
+        status: 200,
+        message: values,
+      });
+    });
+  });
+
+  //----------------------------------------------------------------------------------------------------//
+  describe('fetchUserGameService', () => {
+    it('Should return status 200 and the data if function is successfull', async () => {
+      expect(await gameServices_Test.fetchUserGameService(1)).toEqual({
+        status: 200,
+        message: values,
+      });
+    });
+
+    it('Should return status 404 and error message if Id is missing', async () => {
+      //@ts-ignore
+      expect(await gameServices_Test.fetchUserGameService(undefined)).toEqual({
+        status: 404,
+        message: 'Missing Id',
+      });
+    });
+  });
+
   //----------------------------------------------------------------------------------------------------//
   describe('createGameService:', () => {
     it('Should return status 200 and the data if function is success', async () => {
