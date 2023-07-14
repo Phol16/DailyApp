@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import router from './src/api/router';
 
 const app = express();
 
@@ -10,4 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan('dev'));
 
-export default app
+app.use('/api', router());
+
+export default app;
