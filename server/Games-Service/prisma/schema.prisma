@@ -19,7 +19,7 @@ model Games {
   publisher Publisher @relation(fields: [publisherId], references: [id])
   publisherId Int
 
-  UserId UserGames[]
+  userId User[]
 }
 
 model Publisher{
@@ -29,7 +29,7 @@ model Publisher{
   name String @db.VarChar(255)
   image String @db.VarChar(255)
 
-  Games Games[]
+  gamesId Games[]
 }
 
 model User {
@@ -39,15 +39,5 @@ model User {
   name String @db.VarChar(255)
   image String @db.VarChar(255)
 
-  GamesId UserGames[]
-}
-
-model UserGames {
-  games Games @relation(fields: [gamesId], references: [id])
-  gamesId Int
-
-  user User @relation(fields: [userId], references: [id])
-  userId Int
-
-  @@id([gamesId, userId])
+  gamesId Games[]
 }

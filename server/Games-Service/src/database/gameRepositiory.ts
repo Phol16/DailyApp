@@ -9,9 +9,13 @@ export class gamesRepository implements IGameRepository {
         throw new Error('Missing Id');
       }
 
-      const result = await prisma.userGames.findMany({
+      const result = await prisma.games.findMany({
         where: {
-          userId: id,
+          userId: {
+            some: {
+              id,
+            },
+          },
         },
       });
 
@@ -55,17 +59,13 @@ export class gamesRepository implements IGameRepository {
           title: values.title,
           description: values.description,
           publisher: {
-            create: {
-              id: values.publisher.id!,
-              email: values.publisher.email,
-              name: values.publisher.name,
-              image: values.publisher.image,
-              username: values.publisher.username,
+            connect: {
+              id: values.publisher.id,
             },
           },
-          UserId: {
-            create: {
-              userId: values.userId.id!,
+          userId: {
+            connect: {
+              id: values.userId.id!,
             },
           },
         },
@@ -101,20 +101,6 @@ export class gamesRepository implements IGameRepository {
         data: {
           title: values.title,
           description: values.description,
-          publisher: {
-            create: {
-              id: values.publisher.id!,
-              email: values.publisher.email,
-              name: values.publisher.name,
-              image: values.publisher.image,
-              username: values.publisher.username,
-            },
-          },
-          UserId: {
-            create: {
-              userId: values.userId.id!,
-            },
-          },
         },
       });
 
